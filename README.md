@@ -7,9 +7,7 @@
 #### Parameters are passed to Yelp Fusion (API)
 
 ### External links provided (Google Maps & Yelp Review)
-
-![Links](https://imgur.com/pETU9WH.gif)
-
+![Links](https://imgur.com/a/LrLrA6j.gif)
 #### Links are directly correlated to the specific business
 
 ### Validation implemented
