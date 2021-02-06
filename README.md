@@ -1,3 +1,3 @@
 Yelp Randomizer
 By - Michael Lin
-![Demo](https://imgur.com/a/S0vTlXg)
+![Demo](https://imgur.com/3pfkVTa)
