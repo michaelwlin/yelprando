@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Yelp Randomizer - Michael Lin</title>
+    <meta charset="UTF-8">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Spartan|Montserrat|Raleway&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/materialize.css' %}" />
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js">
+    </script>
+
+
+    <style>
+        img {
+            width: 30px;
+        }
+
+        .center-btn {
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: -30px;
+        }
+
+        ::placeholder {
+            text-align: center;
+            /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: rgb(119, 119, 119);
+            opacity: 0.6;
+            /* Firefox */
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            background-color: #2a6fc9;
+        }
+
+        input[type=range]::-moz-range-thumb {
+            background-color: #2a6fc9;
+        }
+
+        input[type=range]::-ms-thumb {
+            background-color: #2a6fc9;
+        }
+
+        input[type=range]+.thumb {
+            background-color: #2a6fc9;
+        }
+
+        input[type=range]+.thumb.active .value {
+            color: white;
+            font-size: 12px;
+        }
+
+        [type="radio"]:checked+span:after,
+
+        [type="radio"].with-gap:checked+span:before,
+
+        [type="radio"].with-gap:checked+span:after {
+
+            border: 2px solid #2a6fc9;
+
+        }
+
+
+
+        [type="radio"]:checked+span:after,
+
+        [type="radio"].with-gap:checked+span:after {
+
+            background-color: #2a6fc9;
+
+        }
+    </style>
+</head>
+
+<body style=" font-family: 'Raleway'; background-image: linear-gradient(to right, #243949 0%, #3c5e7c 100%);">
+    <nav>
+        <div class="nav-wrapper style"
+            style="font-family: 'Raleway'; background-image: linear-gradient(to right, #243949 0%, #3c5e7c 100%);">
+            <a href="/clear" class="brand-logo center"
+                style="font-family:'Spartan'; font-size:30px; color: rgb(255, 255, 255);">
+                <img id="yelplogo" src="{% static 'images/yelplogo.png' %}" alt=""> yelp_but_random</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li class="projects"><a href="#" style="color:#3c5e7c;" class="waves-effect waves-light white btn"><i
+                            class="material-icons right">terrain</i>Michael Lin</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="col s12">
+            <div class="container">
+                <div class="card-panel hoverable" style="margin-top:3.5%;padding: 50px;">
+                    <form action="/search_randomize" method="POST">
+                        <h3 style="text-align: center;margin-top: -20px;">Search Preferences</h3>
+                        {% csrf_token%}
+                        <h4 style="text-align: center;">Term</h4>
+                        <input type="text" name="term" id="term" placeholder="ie: 'Sushi'"
+                            style="text-align: center;font-size: 20px;">
+                            {% if messages %}
+                            {% for message in messages %}
+                            {% if "term" in message.tags %}
+                            <span class="helper-text center" style="color: red;">{{message}}</span>
+                            {% endif %}
+                            {% endfor %}
+                            {% endif %}
+                        <h4 style="text-align: center;">Location</h4>
+                        <input type="text" name="location" placeholder="ie: 'Cupertino, CA' or '95014'"
+                            style="text-align: center;font-size: 20px" id="location">
+                            {% if messages %}
+                            {% for message in messages %}
+                            {% if "location" in message.tags %}
+                            <span class="helper-text center" style="color: red;">{{message}}</span>
+                            {% endif %}
+                            {% endfor %}
+                            {% endif %}
+                        <h5 style="text-align: center;">Radius (Miles)<br><span class="helper-text"
+                                style="font-size: 15px; vertical-align: middle;color: rgb(90, 90, 90);"> (Optional -
+                                Default is 5)</span></h5>
+
+
+                        <p class="range-field">
+                            <input type="range" id="test" name="radius" min="0.01" step="0.01" max="9.99" style="text-align: center;" />
+                        </p>
+                        <div class="pricefield" style="text-align: center;">
+                            <h5>Price<br><span class="helper-text"
+                                    style="font-size: 15px; vertical-align: middle;color: rgb(90, 90, 90);">
+                                    (Optional)</span></h5>
+                            <input type="hidden" name="price" value="1,2,3,4">
+                            <p style="text-align: center;">
+                                <label>
+                                    <input  name="price" value="1" type="radio" />
+                                    <span>$</span>
+                                </label>
+                            </p>
+                            <p style="text-align: center;">
+                                <label>
+                                    <input name="price" value="2" type="radio" />
+                                    <span>$$</span>
+                                </label>
+                            </p>
+                            <p style="text-align: center;">
+                                <label>
+                                    <input name="price" value="3" type="radio" />
+                                    <span>$$$</span>
+                                </label>
+                            </p>
+                            <p style="text-align: center;">
+                                <label>
+                                    <input name="price" value="4" type="radio" />
+                                    <span>$$$$</span>
+                                </label>
+                            </p>
+                        </div>
+                        <div class="center-btn">
+                            <button class="btn waves-effect waves-purple blue-grey darken-2 btn-large" type="submit"
+                                name="action" style="color: rgb(255, 255, 255);">Search and
+                                Randomize
+                                <i class="material-icons right">local_dining</i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

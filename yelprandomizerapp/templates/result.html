@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> Yelp Randomizer - Michael Lin</title>
+    <meta charset="UTF-8">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Spartan|Montserrat|Raleway&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="{% static 'css/materialize.css' %}" />
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js">
+    </script>
+    <style>
+        img {
+            width: 30px;
+        }
+
+        .checked {
+            color: rgb(227, 57, 41);
+        }
+
+        .fa-star-half-full {
+            color: rgb(227, 57, 41);
+        }
+
+        .fa {
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body style=" font-family: 'Spartan'; background-image: linear-gradient(to right, #243949 0%, #3c5e7c 100%);">
+    <nav>
+        <div class="nav-wrapper style"
+            style="font-family: 'Raleway'; background-image: linear-gradient(to right, #243949 0%, #3c5e7c 100%);">
+            <a href="/clear" class="brand-logo center"
+                style="font-family:'Spartan'; font-size:30px; color: rgb(255, 255, 255);">
+                <img id="yelplogo" src="{% static 'images/yelplogo.png' %}" alt=""> yelp_but_random</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li class="projects"><a href="#" style="color:#3c5e7c;" class="waves-effect waves-light white btn"><i
+                            class="material-icons right">terrain</i>Michael Lin</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="col s12">
+            <div class="container">
+                <div class="card-panel hoverable" style="margin-top:2.5%;padding: 50px;">
+                    <a class="btn waves-effect waves-purple blue-grey darken-2 btn-small"
+                        style="margin-top: -7%; margin-left: -4%;" href="/search">Search Preferences <i
+                            class="material-icons left">arrow_back</i></a>
+                    <h1 style="text-align: center;font-size: 60px; margin-top: -1%;"><a target="_blank" href = "{{final_result.url}}">{{final_result.name}}</a></h1>
+                    <div class="context" style="text-align: center;">
+                        <div class="foodimg" style="display: inline-block; text-align: center;">
+
+                            <img class="poop" style="width:400px;" src="{{final_result.image_url}}" alt="">
+
+                            <div class="caption" style="text-align: left; display: block;">
+                                <p>{{final_result.name}}</p>
+                                <p>Looked for: {{request.session.term}}</p>
+                                <p>Location: {{request.session.location}}</p>
+                            </div>
+                        </div>
+                        <div class="pic_text"
+                            style="display: inline-block; vertical-align:top; text-align: center; margin-left:5%">
+                            <h5>{{final_result.price}}</h5>
+                            <div class="categories"
+                                style="display: inline-block; text-align: center; vertical-align: middle;">
+                                {% for category in categories%}
+                                <h6 style="font-size: 25px;">{{category.title}}</h6>
+                                {% endfor %}
+                            </div>
+                            <div class="rating"
+                                style="display: inline-block; text-align: center;vertical-align: middle; margin-left: 20px;">
+                                <p>{% if final_result.rating == 0.5 %}</p>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star-half-full"></span>
+                                <span class="fa fa-star" style="color:rgb(235, 235, 235)"></span>
+                                <span class="fa fa-star" style="color:rgb(235, 235, 235)"></span>
+                                {% endif %}
+                                <p>{% if final_result.rating == 1 %}</p>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star" style="color:rgb(235, 235, 235)"></span>
+                                <span class="fa fa-star" style="color:rgb(235, 235, 235)"></span>
+                                <span class="fa fa-star" style="color:rgb(235, 235, 235)"></span>
+                                <span class="fa fa-star" style="color:rgb(235, 235, 235)"></span>
+                                {% endif %}
+                                <p>{% if final_result.rating == 1.5 %}</p>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star-half-full"></span>
+                                <span class="fa fa-star" style="color:rgb(235, 235, 235)"></span>
+                                <span class="fa fa-star" style="color:rgb(235, 235, 235)"></span>
+                                <span class="fa fa-star" style="color:rgb(235, 235, 235)"></span>
+                                {% endif %}
+                                <p>{% if final_result.rating == 2 %}</p>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star" style="color:rgb(235, 235, 235)"></span>
+                                <span class="fa fa-star" style="color:rgb(235, 235, 235)"></span>
+                                <span class="fa fa-star" style="color:rgb(235, 235, 235)"></span>
+                                {% endif %}
+                                <p>{% if final_result.rating == 2.5 %}</p>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star-half-full"></span>
+                                <span class="fa fa-star" style="color:rgb(235, 235, 235)"></span>
+                                <span class="fa fa-star" style="color:rgb(235, 235, 235)"></span>
+                                {% endif %}
+                                <p>{% if final_result.rating == 3 %}</p>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star" style="color:rgb(235, 235, 235)"></span>
+                                <span class="fa fa-star" style="color:rgb(235, 235, 235)"></span>
+                                {% endif %}
+                                <p>{% if final_result.rating == 3.5 %}</p>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star-half-full"></span>
+                                <span class="fa fa-star" style="color:rgb(235, 235, 235)"></span>
+                                {% endif %}
+                                <p>{% if final_result.rating == 4 %}</p>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star" style="color:rgb(235, 235, 235)"></span>
+                                {% endif %}
+                                <p>{% if final_result.rating == 4.5 %}</p>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star-half-full"></span>
+                                {% endif %}
+                                <p>{% if final_result.rating == 5 %}</p>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                {% endif %}
+                                <h6 style="font-size:20px;">Reviews: {{final_result.review_count}}</h4>
+                            </div>
+                            <p><a href="https://www.google.com/maps/search/{{final_result.name}}+{{address}}"
+                                    target="_blank" style="font-size: 16px;">{{address}}<span
+                                        style="color: black; font-size: 13px; vertical-align: middle;"> ({{distance}}
+                                        Miles)</span></a></p>
+                            <p><a href="tel:{{phone}}" style="font-size: 16px;">{{final_result.display_phone}}</a></p>
+                            <a class="btn waves-effect waves-purple blue-grey darken-2 btn-large"
+                                href="/randomize_again">Randomize Again <i
+                                    class="material-icons right">local_dining</i></a>
+                        </div>
+                    </div>
+
+                </div>
+</body>
+
+</html>
