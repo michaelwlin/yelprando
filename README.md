@@ -8,4 +8,9 @@
 
 ### External links provided (Google Maps & Yelp Review)
 ![Links](https://imgur.com/8FPdT7c.gif)
+#### Links are directly correlated to the specific business
 
+### Validation implemented
+![Validation](https://imgur.com/nVftfAI.gif)
+#### Parameters that are unreasonable such as a $$$$ "McDonalds" won't return anything
+#### Parameters that are not correctly spelled will not return anything
