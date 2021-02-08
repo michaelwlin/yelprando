@@ -1,6 +1,6 @@
 # Yelp Randomizer
 ### *By - Michael Lin*
-#### *Made with HTML, Python, Django*
+#### *Made with Python, Django, HTML, Materialize CSS*
 
 ## Search with specific parameters 
 ![Search](https://imgur.com/3pfkVTa.gif)
